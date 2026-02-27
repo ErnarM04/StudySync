@@ -7,6 +7,7 @@ import (
     "syscall"
     "time"
 
+    // Ensures the swag-generated OpenAPI package is linked at startup (same spec api.SetupRouter relies on).
     _ "github.com/kadyrbayev2005/studysync/docs"
 
     "github.com/joho/godotenv"

@@ -1,3 +1,6 @@
+// Package api builds the Gin router. REST endpoints are annotated in internal/controllers
+// with swaggo markers (@Summary, @Router, …); running swag regenerates docs and swagger.yaml/json.
+// The blank import below registers that generated OpenAPI spec; /swagger/*any serves the interactive UI (Swagger UI).
 package api
 
 import (
@@ -36,6 +39,7 @@ func SetupRouter(db *gorm.DB) *gin.Engine {
 
     // public routes
     r.GET("/health", func(c *gin.Context) { c.JSON(200, gin.H{"status": "ok"}) })
+    // Interactive API docs (Swagger UI); raw JSON is available under the same path tree.
     r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
     // auth routes
