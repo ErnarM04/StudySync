@@ -2,6 +2,8 @@ package models
 
 import "time"
 
+// User is the persisted account row in table "users": identity, login email (unique),
+// bcrypt hash (never exposed as JSON), role for authorization, and creation time.
 type User struct {
 	ID           uint      `json:"id" gorm:"primaryKey"`
 	Name         string    `json:"name"`

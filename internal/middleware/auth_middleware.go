@@ -8,6 +8,8 @@ import (
 	"github.com/kadyrbayev2005/studysync/internal/services"
 )
 
+// AuthMiddleware expects Authorization: Bearer <JWT>, parses it with services.ParseJWT,
+// and stores user_id and user_role on the Gin context for downstream handlers.
 func AuthMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		authHeader := c.GetHeader("Authorization")
@@ -27,7 +29,6 @@ func AuthMiddleware() gin.HandlerFunc {
 			return
 		}
 
-		// put user info into context
 		c.Set("user_id", claims.UserID)
 		c.Set("user_role", claims.Role)
 		c.Next()

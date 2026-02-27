@@ -6,6 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// RoleMiddleware allows the request only if AuthMiddleware has set user_role to required.
 func RoleMiddleware(required string) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		roleI, exists := c.Get("user_role")
