@@ -39,6 +39,7 @@ func (r *TaskRepository) Delete(id uint) error {
 	return r.db.Delete(&models.Task{}, id).Error
 }
 
+// GetTasks returns a page of tasks matching the filter and the total row count for pagination metadata.
 func (r *TaskRepository) GetTasks(filter *TaskFilter) ([]models.Task, int64, error) {
 	var tasks []models.Task
 	var total int64
