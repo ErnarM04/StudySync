@@ -8,6 +8,7 @@ import (
     "github.com/kadyrbayev2005/studysync/internal/utils"
 )
 
+// EmailConfig holds SMTP connection settings loaded from the environment in InitSMTP.
 type EmailConfig struct {
     Host     string
     Port     string
@@ -18,6 +19,7 @@ type EmailConfig struct {
 
 var emailConfig *EmailConfig
 
+// InitSMTP reads SMTP_HOST, SMTP_PORT, SMTP_USERNAME, SMTP_PASSWORD, and SMTP_FROM for outbound mail.
 func InitSMTP() {
     emailConfig = &EmailConfig{
         Host:     utils.GetEnv("SMTP_HOST", "smtp.gmail.com"),
@@ -28,6 +30,7 @@ func InitSMTP() {
     }
 }
 
+// SendEmail delivers a plain-text message over SMTP with TLS (e.g. Gmail submission on port 587).
 func SendEmail(to, subject, body string) error {
     if emailConfig == nil {
         return fmt.Errorf("SMTP not initialized")
@@ -92,6 +95,7 @@ func SendEmail(to, subject, body string) error {
     return nil
 }
 
+// SendDeadlineReminder emails the student a fixed-template notice about an upcoming task due time.
 func SendDeadlineReminder(userEmail, taskTitle string, dueDate string) error {
     subject := "StudySync: Upcoming Deadline Reminder"
     body := fmt.Sprintf(`

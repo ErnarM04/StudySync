@@ -8,6 +8,8 @@ import (
     "gorm.io/gorm"
 )
 
+// StartReminderWorker runs until ctx is cancelled: every minute it finds deadlines due within the next
+// half hour and sends SMTP reminders via SendDeadlineReminder (requires InitSMTP).
 func StartReminderWorker(ctx context.Context, db *gorm.DB) {
     ticker := time.NewTicker(1 * time.Minute) // Check every 1 minutes
     defer ticker.Stop()
