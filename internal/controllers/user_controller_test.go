@@ -18,7 +18,7 @@ import (
 	"gorm.io/gorm"
 )
 
-// поднимаем in-memory БД, репозиторий и контроллер
+// setupUserTestServer builds an in-memory SQLite DB, user repository, controller, and Gin engine for unit tests.
 func setupUserTestServer(t *testing.T) (*UserController, *gin.Engine) {
 	t.Helper()
 
@@ -36,7 +36,6 @@ func setupUserTestServer(t *testing.T) (*UserController, *gin.Engine) {
 	userRepo := repository.NewUserRepository(db)
 	ctrl := NewUserController(userRepo)
 
-	// фейковый Redis, чтобы Del не падал
 	services.Ctx = context.Background()
 	services.RedisClient = redis.NewClient(&redis.Options{
 		Addr: "localhost:6379",

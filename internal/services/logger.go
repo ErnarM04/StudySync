@@ -10,10 +10,11 @@ import (
     "gopkg.in/natefinch/lumberjack.v2"
 )
 
-// Logger — глобальный экземпляр логгера
+// Logger is the shared slog logger for the app; InitLogger configures it from env and must run early in main.
 var Logger *slog.Logger
 
-// InitLogger инициализирует логгер по переменным окружения
+// InitLogger sets level (LOG_LEVEL), format json|text (LOG_FORMAT), and output stdout|file|both (LOG_OUTPUT).
+// File mode writes rotating logs under logs/studysync.log via lumberjack.
 func InitLogger() {
     logLevel := utils.GetEnv("LOG_LEVEL", "info")
     logFormat := utils.GetEnv("LOG_FORMAT", "json")
@@ -78,7 +79,7 @@ func InitLogger() {
         "output", logOutput)
 }
 
-// Удобные функции для логирования - они ДОЛЖНЫ быть экспортированы
+// Debug, Info, Warn, and Error are thin wrappers so the rest of the codebase logs through one configured Logger.
 func Debug(msg string, args ...any) {
     if Logger != nil {
         Logger.Debug(msg, args...)

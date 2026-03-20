@@ -18,6 +18,7 @@ import (
     "gorm.io/gorm"
 )
 
+// setupIntegrationDB returns an in-memory SQLite DB with migrated models and seed users/subjects for API tests.
 func setupIntegrationDB(t *testing.T) (*gorm.DB, func()) {
     t.Helper()
 
@@ -59,6 +60,7 @@ func setupIntegrationDB(t *testing.T) (*gorm.DB, func()) {
     }
 }
 
+// TestIntegration_CompleteFlow exercises register, login, JWT-protected routes, and basic task flow end-to-end.
 func TestIntegration_CompleteFlow(t *testing.T) {
     db, cleanup := setupIntegrationDB(t)
     defer cleanup()

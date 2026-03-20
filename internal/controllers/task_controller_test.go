@@ -18,7 +18,7 @@ import (
 	"gorm.io/gorm"
 )
 
-// поднимаем in-memory БД, TaskRepository, контроллер и роутер
+// setupTaskTestServer builds in-memory DB, task repo, controller, minimal Gin routes, and a Redis client for cache tests.
 func setupTaskTestServer(t *testing.T) (*repository.TaskRepository, *gin.Engine) {
 	t.Helper()
 
@@ -36,7 +36,6 @@ func setupTaskTestServer(t *testing.T) (*repository.TaskRepository, *gin.Engine)
 	taskRepo := repository.NewTaskRepository(db)
 	ctrl := NewTaskController(taskRepo)
 
-	// фейковый Redis
 	services.Ctx = context.Background()
 	services.RedisClient = redis.NewClient(&redis.Options{
 		Addr: "localhost:6379",
