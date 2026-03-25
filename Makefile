@@ -1,4 +1,4 @@
-.PHONY: build run test migrate-up migrate-down migrate-create clean
+.PHONY: build run test test-integration migrate-up migrate-down migrate-create clean docker-up docker-down swagger logs help
 
 # Build the application
 build:

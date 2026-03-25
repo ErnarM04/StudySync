@@ -54,7 +54,7 @@ go run cmd/main.go
 # Swagger UI: http://localhost:8080/swagger/index.html
 ```
 
-### Option 2: Using MakerFile
+### Option 2: Using Makefile
 
 ```bash
 # Clone the repository
@@ -62,7 +62,7 @@ git clone https://github.com/ernarm04/studysync.git
 cd studysync
 
 # Start services using Docker Compose
-make docker up
+make docker-up
 
 # Updating DB migrations
 make migrate-up
