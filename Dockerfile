@@ -1,4 +1,5 @@
-# Use Go 1.25 to match go.mod requirement
+# StudySync API — build with: docker compose build api (stack: postgres, redis, api in docker-compose.yml).
+# Base image matches go.mod toolchain.
 FROM golang:1.25-alpine
 
 # Set working directory inside the container

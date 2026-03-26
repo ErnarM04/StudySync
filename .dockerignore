@@ -1,0 +1,8 @@
+# Slimmer build context; never copy local secrets into the image
+.git
+.env
+.env.*
+!.env.example
+bin/
+logs/
+*.log
